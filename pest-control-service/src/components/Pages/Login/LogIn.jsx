@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
+import anime2 from "../../../assets/login.json";
 const LogIn = () => {
   return (
-    <div>
-      <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+    <div className=" container mx-auto flex  flex-col lg:flex-row md:flex-col  justify-center items-center ">
+      <div className="">
+        <Lottie animationData={anime2}></Lottie>
+      </div>
+      <div className="container mx-auto mt-28 w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
         <h2 className="mb-3 text-3xl font-semibold text-center">
           Login to your account
         </h2>
@@ -41,7 +46,7 @@ const LogIn = () => {
                 type="email"
                 name="email"
                 id="email"
-                placeholder="leroy@jenkins.com"
+                placeholder="Email"
                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
               />
             </div>

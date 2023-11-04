@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const NavBar = () => {
-  // Assuming you have a state to track whether the user is logged in or not
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const NavBar = ({ isLoggedIn }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div>
@@ -24,17 +27,49 @@ const NavBar = () => {
               </h2>
             </div>
           </Link>
-          <div
-            id="navbar-image-and-text-1"
-            className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
-          >
-            <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:pl-5">
+          <div className="flex items-center">
+            <div className="sm:hidden">
+              <button
+                onClick={toggleMenu}
+                type="button"
+                className="text-gray-500 hover:text-gray-700 focus:outline-none"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+            <div
+              className={`${
+                isMenuOpen ? "block" : "hidden"
+              } sm:flex sm:items-center sm:ml-4 `}
+            >
               <Link to="/" className="font-medium text-blue-500">
                 Home
               </Link>
               <Link
                 to="/services"
-                className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+                className="ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
               >
                 Services
               </Link>
@@ -47,7 +82,7 @@ const NavBar = () => {
                     Dashboard
                   </Link>
                   <a
-                    onClick={() => setIsLoggedIn(false)}
+                    // onClick={() => setIsLoggedIn(false)}
                     className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
                     href="#"
                   >
@@ -57,7 +92,7 @@ const NavBar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+                  className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ml-4"
                 >
                   Log in
                 </Link>
