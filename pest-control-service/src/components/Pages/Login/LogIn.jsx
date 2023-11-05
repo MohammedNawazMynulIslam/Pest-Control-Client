@@ -1,7 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import anime2 from "../../../assets/login.json";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+
 const LogIn = () => {
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password).then((result) => {
+      console.log(result.user);
+      notifySuccess("Login Successfully");
+    });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result);
+        navigate(location?.state ? location.state : "/");
+        notifySuccess("Login Successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error signing in with Google!",
+        });
+      });
+  };
+
+  const notifySuccess = (message) => {
+    Swal.fire({
+      icon: "success",
+      title: "Success!",
+      text: message,
+    });
+  };
   return (
     <div className=" container mx-auto flex  flex-col lg:flex-row md:flex-col  justify-center items-center ">
       <div className="">
@@ -18,7 +64,7 @@ const LogIn = () => {
         <div className="my-6 space-y-4">
           <button
             aria-label="Login with Google"
-            type="button"
+            onClick={handleGoogleSignIn}
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ri focus:ri dark:border-gray-400 focus:ri"
           >
             <svg
@@ -36,7 +82,12 @@ const LogIn = () => {
           <p className="px-3 dark:text-gray-400">OR</p>
           <hr className="w-full dark:text-gray-400"></hr>
         </div>
-        <form noValidate="" action="" className="space-y-8">
+        <form
+          onSubmit={handleLogin}
+          noValidate=""
+          action=""
+          className="space-y-8"
+        >
           <div className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm">
@@ -55,13 +106,6 @@ const LogIn = () => {
                 <label htmlFor="password" className="text-sm">
                   Password
                 </label>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="text-xs hover:underline dark:text-gray-400"
-                >
-                  Forgot password?
-                </a>
               </div>
               <input
                 type="password"
@@ -73,14 +117,16 @@ const LogIn = () => {
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900"
           >
             Sign in
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
+
 export default LogIn;

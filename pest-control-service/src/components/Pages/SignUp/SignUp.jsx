@@ -1,7 +1,60 @@
 import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Lottie from "lottie-react";
 import anime from "../../../assets/signUp.json";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const notifySuccess = (message) => {
+    toast.success(message, {
+      position: "top-center",
+    });
+  };
+
+  const notifyError = (message) => {
+    toast.error(message, {
+      position: "top-center",
+    });
+  };
+
+  // signUp function
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const url = form.url.value;
+    console.log(name, password, email, url);
+
+    // password verification
+    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
+    if (!passwordCheck.test(password)) {
+      notifyError(
+        "Password must be at least 6 characters long, contain at least one capital letter, and one special character."
+      );
+      return;
+    }
+
+    // user created
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+        notifySuccess("Account created successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        notifyError("Failed to create account . Please try again");
+      });
+  };
+  const ShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="flex  justify-center items-center p-5">
       <div className="">
@@ -43,7 +96,12 @@ const SignUp = () => {
           <p className="px-3 dark:text-gray-400">OR</p>
           <hr className="w-full dark:text-gray-400"></hr>
         </div>
-        <form onSubmit={""} noValidate="" action="" className="space-y-8">
+        <form
+          onSubmit={handleSignUp}
+          noValidate=""
+          action=""
+          className="space-y-8"
+        >
           <div className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm">
@@ -55,6 +113,7 @@ const SignUp = () => {
                 id="name"
                 placeholder="User Name"
                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                required
               />
             </div>
             <div className="space-y-2">
@@ -67,6 +126,7 @@ const SignUp = () => {
                 id="email"
                 placeholder="Email"
                 className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                required
               />
             </div>
             <div className="space-y-2">
@@ -74,21 +134,22 @@ const SignUp = () => {
                 <label htmlFor="password" className="text-sm">
                   Password
                 </label>
-                <a
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="text-xs hover:underline dark:text-gray-400"
-                >
-                  Forgot password?
-                </a>
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 placeholder="*****"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+                className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400 "
+                required
               />
+              <div className="ml-80">
+                {showPassword ? (
+                  <FaEyeSlash onClick={ShowPassword} />
+                ) : (
+                  <FaEye onClick={ShowPassword} />
+                )}
+              </div>
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm">
@@ -104,13 +165,14 @@ const SignUp = () => {
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900"
           >
-            Sign in
+            Sign Up
           </button>
         </form>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

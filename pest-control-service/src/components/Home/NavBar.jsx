@@ -1,11 +1,25 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-const NavBar = ({ isLoggedIn }) => {
+const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
+
+  const handleLogOut = () => {
+    logOut().then((result) => {
+      console.log(result);
+    });
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDashboardMenu = () => {
+    setIsDashboardOpen(!isDashboardOpen);
   };
 
   return (
@@ -15,18 +29,7 @@ const NavBar = ({ isLoggedIn }) => {
           className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
           aria-label="Global"
         >
-          <Link to="/">
-            <div className="flex items-center justify-evenly">
-              <img
-                className="h-[50px] w-[50px]"
-                src="https://i.ibb.co/MBt7ntK/c02a0527874bb2d01be8ea75f1346c51.jpg"
-                alt=""
-              />
-              <h2 className="text-white font-extrabold text-2xl ml-3">
-                Pest <span className="text-green-500">Control</span>
-              </h2>
-            </div>
-          </Link>
+          <NavLink to="/">{/* ... */}</NavLink>
           <div className="flex items-center">
             <div className="sm:hidden">
               <button
@@ -34,68 +37,84 @@ const NavBar = ({ isLoggedIn }) => {
                 type="button"
                 className="text-gray-500 hover:text-gray-700 focus:outline-none"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {isMenuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16m-7 6h7"
-                    />
-                  )}
-                </svg>
+                {/* ... */}
               </button>
             </div>
             <div
               className={`${
                 isMenuOpen ? "block" : "hidden"
-              } sm:flex sm:items-center sm:ml-4 `}
+              } sm:flex sm:items-center sm:ml-4`}
             >
-              <Link to="/" className="font-medium text-blue-500">
+              <NavLink
+                exact
+                to="/"
+                className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
+                  location.pathname === "/" ? "underline " : ""
+                }`}
+              >
                 Home
-              </Link>
-              <Link
-                to="/services"
-                className="ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+              </NavLink>
+              <NavLink
+                className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
+                  location.pathname === "/services" ? "underline " : ""
+                }`}
               >
                 Services
-              </Link>
-              {isLoggedIn ? (
+              </NavLink>
+              {user ? (
                 <>
-                  <Link
-                    to="/dashboard"
-                    className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
+                  <div
+                    className="relative"
+                    onMouseEnter={toggleDashboardMenu}
+                    onMouseLeave={toggleDashboardMenu}
                   >
-                    Dashboard
-                  </Link>
-                  <a
-                    // onClick={() => setIsLoggedIn(false)}
-                    className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
-                    href="#"
+                    <NavLink
+                      to="/dashboard"
+                      className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
+                        location.pathname === "/dashboard" ? "underline " : ""
+                      }`}
+                    >
+                      Dashboard
+                    </NavLink>
+                    {isDashboardOpen && (
+                      <div className="absolute mt-2 py-2 w-48 bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                        <NavLink
+                          to="/dashboard/my-services"
+                          className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          My Services
+                        </NavLink>
+                        <NavLink
+                          to="/dashboard/add-services"
+                          className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          Add Services
+                        </NavLink>
+                        <NavLink
+                          to="/dashboard/my-schedules"
+                          className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          My Schedules
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-accent ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500"
                   >
                     Logout
-                  </a>
+                  </button>
                 </>
               ) : (
-                <Link
+                <NavLink
                   to="/login"
-                  className="font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ml-4"
+                  className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
+                    location.pathname === "/login" ? "underline " : ""
+                  }`}
                 >
                   Log in
-                </Link>
+                </NavLink>
               )}
             </div>
           </div>
