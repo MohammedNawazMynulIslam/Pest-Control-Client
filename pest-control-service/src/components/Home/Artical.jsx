@@ -1,7 +1,7 @@
 const Artical = () => {
   return (
     <div>
-      <h2 className=" text-center text-green-800 mt-10 mb-5">
+      <h2 className=" text-green-700 font-bold  underline text-center mt-10 mb-5">
         Revolutionizing Pest Management <br />
       </h2>
       <p className="font-bold text-5xl text-center mb-10">

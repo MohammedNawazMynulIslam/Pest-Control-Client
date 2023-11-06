@@ -15,7 +15,9 @@ const Services = () => {
   }
   return (
     <div className="mt-16">
-      <h1 className="text-center text-green-800">Popular Services</h1>
+      <h1 className="text-green-700 font-bold  underline text-center">
+        Popular Services
+      </h1>
       <p className="font-bold text-5xl text-center mb-11">
         Eliminate Unwanted Pests
       </p>

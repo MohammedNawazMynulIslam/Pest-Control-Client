@@ -6,6 +6,7 @@ import ErrorPage from "../Error/ErrorPage";
 import LogIn from "../Pages/Login/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Services from "../Pages/Services/Services";
+import AllServices from "../Pages/AllServices/AllServices";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
         element: <Services />,
         // loader: () => fetch("http://localhost:3000/services"),
       },
-
+      {
+        path: "/allServices",
+        element: <AllServices></AllServices>,
+      },
       {
         path: "/service/:id",
         // element: <SingleServicePage />,

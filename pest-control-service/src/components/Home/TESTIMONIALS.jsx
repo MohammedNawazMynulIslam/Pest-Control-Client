@@ -1,7 +1,9 @@
 const TESTIMONIALS = () => {
   return (
     <div>
-      <h2 className=" text-center text-green-800 mt-10">TESTIMONIALS</h2>
+      <h2 className=" text-green-700 font-bold  underline text-center mt-10">
+        TESTIMONIALS
+      </h2>
       <p className="font-bold text-5xl text-center mb-10">
         WHAT OUR CLIENT SAYS
       </p>
@@ -17,7 +19,7 @@ const TESTIMONIALS = () => {
               Highly Effective and Eco-Friendly!
             </h3>
             <p className="mt-1 text-gray-800 dark:text-gray-400">
-              Impressed with XYZ Pest Control! They promptly addressed my ant
+              Impressed with Pest Control! They promptly addressed my ant
               problem using eco-friendly products. Professional and effective
               service.
             </p>
@@ -40,7 +42,7 @@ const TESTIMONIALS = () => {
               Swift and Thorough Roach Removal!
             </h3>
             <p className="mt-1 text-gray-800 dark:text-gray-400">
-              ABC Pest Solutions swiftly eliminated our roach infestation.
+              Pest Solutions swiftly eliminated our roach infestation.
               Knowledgeable technician, safe treatments. Havent seen a roach
               since!
             </p>
@@ -63,9 +65,9 @@ const TESTIMONIALS = () => {
               Expert Mouse Control, A++!
             </h3>
             <p className="mt-1 text-gray-800 dark:text-gray-400">
-              DEF Pest Management was excellent in resolving our mouse issue.
-              Professional, tailored treatment, and complete eradication. Highly
-              recommend!
+              Pest Control Management was excellent in resolving our mouse
+              issue. Professional, tailored treatment, and complete eradication.
+              Highly recommend!
             </p>
           </div>
           <div className="p-4 border-t sm:px-5 dark:border-gray-700">
