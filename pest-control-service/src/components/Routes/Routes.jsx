@@ -8,6 +8,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Services from "../Pages/Services/Services";
 import AllServices from "../Pages/AllServices/AllServices";
 import SingleService from "../Pages/SingleService/SingleService";
+import AddService from "../Pages/AddService/AddService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/service/:id",
         element: <SingleService />,
+      },
+      {
+        path: "/addService",
+        element: <AddService />,
       },
       {
         path: "login",
