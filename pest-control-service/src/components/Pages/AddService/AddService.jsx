@@ -1,4 +1,6 @@
 import { useContext } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 const AddService = () => {
   const { user } = useContext(AuthContext);
@@ -10,10 +12,9 @@ const AddService = () => {
   //   post data(add product func)
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log("add");
 
     const form = e.target;
-    const data = {
+    const service = {
       photo: form.serviceUrl.value,
       serviceName: form.serviceName.value,
       yourName: form.yourName.value,
@@ -23,7 +24,24 @@ const AddService = () => {
       description: form.description.value,
       providerImage: form.providerUrl.value,
     };
-    console.log(data);
+    console.log(service);
+    axios
+      .post("http://localhost:3000/addService", service)
+      .then((res) => {
+        console.log(res.data);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully added!",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: `${error}`,
+          text: "There was an error adding the service.",
+        });
+      });
 
     // };
   };
