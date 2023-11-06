@@ -26,70 +26,6 @@ const BookingModal = ({
   };
   return (
     <>
-      <div className="modal">
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div className="flex justify-end px-4 pt-4">
-            <div
-              id="dropdown"
-              className="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-            ></div>
-          </div>
-          <div className="flex flex-col items-center pb-10">
-            <img className="w-[400px]" src={serviceImage} alt={serviceName} />
-            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-              {serviceName}
-            </h5>
-            <span className="text-sm text-gray-500 dark:text-white">
-              <p>User Email: {userEmail}</p>
-              <p>Service Provider Email: {serviceProviderEmail}</p>
-
-              {/* <input
-                className="mr-5 text-black"
-                type="date"
-                value={takingDate}
-                onChange={(e) => setTakingDate(e.target.value)}
-              />
-              <input
-                className="my-3 text-black"
-                type="text"
-                value={specialInstruction}
-                onChange={(e) => setSpecialInstruction(e.target.value)}
-                placeholder="Special Instruction"
-              /> */}
-            </span>
-            <p>{servicePrice}</p>
-            {/* buttons */}
-            <div className="flex gap-5">
-              <button
-                onClick={handlePurchase}
-                type="button"
-                className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-              >
-                Purchase
-              </button>
-
-              <button
-                onClick={onClose}
-                type="button"
-                className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* text */}
-      {/* <div className="text-center">
-        <button
-          type="button"
-          className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-          data-hs-overlay="#hs-subscription-with-image"
-        >
-          Open modal
-        </button>
-      </div> */}
-
       <div
         id="hs-subscription-with-image"
         className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto"
@@ -127,43 +63,35 @@ const BookingModal = ({
                 alt="Image Description"
               />
             </div>
-            <input
-              className="mr-5 text-black"
-              type="date"
-              value={takingDate}
-              onChange={(e) => setTakingDate(e.target.value)}
-            />
-            <input
-              className="my-3 text-black"
-              type="text"
-              value={specialInstruction}
-              onChange={(e) => setSpecialInstruction(e.target.value)}
-              placeholder="Special Instruction"
-            />
+            {/* date */}
 
             <div className="p-4 sm:p-10 text-center overflow-y-auto">
-              <h3 className="mb-2 text-2xl font-bold text-gray-800 dark:text-gray-200">
-                {serviceName} 🎉
+              <h3 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
+                {serviceName}
               </h3>
-              <p>{serviceProviderEmail}</p>
-              <p>{userEmail}</p>
-              <p>{takingDate}</p>
-              <p>{servicePrice}</p>
-              <p>{specialInstruction}</p>
-              <p className="text-gray-500">
-                Thank you for your subscription. You will be sent the next issue
-                of our newsletter shortly.
-              </p>
+              <div className="text-white">
+                <p>{serviceProviderEmail}</p>
+                <p>{userEmail}</p>
+                <p>{takingDate}</p>
+                <p>{servicePrice}</p>
+                <p>{specialInstruction}</p>
+              </div>
+              <input
+                className="mr-5 text-black"
+                type="date"
+                value={takingDate}
+                onChange={(e) => setTakingDate(e.target.value)}
+              />
+              {/* special instuction */}
+              <input
+                className="my-3 text-black"
+                type="text"
+                value={specialInstruction}
+                onChange={(e) => setSpecialInstruction(e.target.value)}
+                placeholder="Special Instruction"
+              />
 
               <div className="mt-6 flex justify-center gap-x-4">
-                {/* <button
-                  type="button"
-                  className="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                  data-hs-overlay="#hs-subscription-with-image"
-                >
-                  Purchase this Service
-                </button> */}
-
                 {/* buttons */}
                 <div className="flex gap-5">
                   <button
@@ -172,14 +100,6 @@ const BookingModal = ({
                     className="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   >
                     Purchase
-                  </button>
-
-                  <button
-                    onClick={onClose}
-                    type="button"
-                    className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                  >
-                    Cancel
                   </button>
                 </div>
               </div>

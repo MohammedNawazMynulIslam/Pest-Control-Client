@@ -19,15 +19,14 @@ const SingleService = () => {
   const handleBookNow = () => {
     setIsModalOpen(true);
   };
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
+
   const handlePurchase = (bookingData) => {
     axios.post("http://localhost:3000/bookings", bookingData).then(
       ((res) => {
+        console.log("Booking succesful", res);
         Swal.fire({
           icon: "success",
-          title: `${serviceName} booked successfully`,
+          title: "Booked successfully",
           text: "Thank you for booking this service!",
         });
       }).catch((err) => {
@@ -66,36 +65,12 @@ const SingleService = () => {
     userEmail,
   } = data;
 
-  // const handleBookNow = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const handleModalClose = () => {
-  //   setIsModalOpen(false);
-  // };
-  // const handlePurchase = (bookingData) => {
-  //   axios.post("http://localhost:3000/bookings", bookingData).then(
-  //     ((res) => {
-  //       Swal.fire({
-  //         icon: "success",
-  //         title: `${serviceName} booked successfully`,
-  //         text: "Thank you for booking this service!",
-  //       });
-  //     }).catch((err) => {
-  //       console.error("Error booking service:", err);
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "Booking Failed",
-  //         text: "An error occurred while booking the service. Please try again later.",
-  //       });
-  //     })
-  //   );
-  // };
-
   return (
-    <div>
-      <h1>Single Servic {serviceArea}</h1>
-      <p>{servicePrice}</p>
+    <div className="mx-auto flex justify-center items-center flex-col gap-5">
+      <h1 className=" flex flex-col justify-center items-center text-green-700 font-bold  text-5xl underline text-center my-10">
+        Single Service
+      </h1>
+
       <Card
         className="max-w-sm "
         imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
@@ -130,13 +105,14 @@ const SingleService = () => {
           </div>
         </div>
       </Card>
-      {/* <button onClick={handleBookNow}>Book Now</button> */}
+
       {isModalOpen && (
         <BookingModal
           serviceName={serviceName}
           serviceImage={serviceImage}
           serviceProviderEmail={providerEmail}
           userEmail={userEmail}
+          servicePrice={servicePrice}
           onPurchase={handlePurchase}
           onClose={() => setIsModalOpen(false)}
         />
