@@ -7,8 +7,15 @@ import { useState } from "react";
 
 const AllServices = () => {
   const [serviceTerm, setServiceName] = useState("");
+  const [showMore, setShowMore] = useState(6);
+
+  //   filter func
   const handleSearch = (e) => {
     setServiceName(e.target.value);
+  };
+  //   show more func
+  const handleShowMore = () => {
+    setShowMore(showMore + 6);
   };
   const { data, isLoading, isFetching } = useServicesArea();
   console.log(data, isLoading, isFetching);
@@ -35,7 +42,7 @@ const AllServices = () => {
         className="border p-2 rounded"
       />
 
-      {filteredName.map((allservice) => {
+      {filteredName.slice(0, showMore).map((allservice) => {
         return (
           <AllServicesCard
             key={allservice._id}
@@ -43,7 +50,11 @@ const AllServices = () => {
           ></AllServicesCard>
         );
       })}
-      <Button color="success">Show More</Button>
+      {showMore < filteredName.length && (
+        <Button onClick={handleShowMore} color="success">
+          Show More
+        </Button>
+      )}
     </div>
   );
 };
