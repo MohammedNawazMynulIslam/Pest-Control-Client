@@ -7,6 +7,7 @@ import LogIn from "../Pages/Login/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Services from "../Pages/Services/Services";
 import AllServices from "../Pages/AllServices/AllServices";
+import SingleService from "../Pages/SingleService/SingleService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,7 +21,6 @@ const router = createBrowserRouter([
       {
         path: "/services",
         element: <Services />,
-        // loader: () => fetch("http://localhost:3000/services"),
       },
       {
         path: "/allServices",
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/service/:id",
-        // element: <SingleServicePage />,
+        element: <SingleService />,
       },
       {
         path: "login",

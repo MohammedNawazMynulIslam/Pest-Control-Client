@@ -3,9 +3,11 @@ import Loading from "../../../assets/loading.json";
 
 import useServices from "../../../hooks/useServices";
 import ServicesCard from "./ServicesCard";
+
 const Services = () => {
   const { data, isLoading, isFetching } = useServices();
   console.log(data, isLoading, isFetching);
+  console.log(typeof data);
   if (isLoading === true) {
     return (
       <div>
