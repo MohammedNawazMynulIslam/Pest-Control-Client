@@ -1,19 +1,40 @@
-import { useContext } from "react";
 import axios from "axios";
+import Lottie from "lottie-react";
+import Loading from "../../../assets/loading.json";
+
 import Swal from "sweetalert2";
-import { AuthContext } from "../../../AuthProvider/AuthProvider";
-const AddService = () => {
-  const { user } = useContext(AuthContext);
-  const userName = user.displayName;
-  const userEmail = user.email;
-  const photoUrl = user.photoURL;
-  console.log(userName, userEmail, photoUrl);
+import useUpdateService from "../../../hooks/useUpdateService";
+import { useParams } from "react-router-dom";
 
-  //   post data(add product func)
-  const handleAdd = (e) => {
+const EditService = () => {
+  const { id } = useParams();
+  const { data, isLoading, isFetching } = useUpdateService({ _id: id });
+  console.log(data, isLoading, isFetching);
+  if (isLoading === true) {
+    return (
+      <div>
+        <Lottie animationData={Loading}></Lottie>
+      </div>
+    );
+  }
+  console.log(Object.keys(data).join(","));
+  const {
+    _id,
+    photo,
+    serviceName,
+    yourName,
+    email,
+    price,
+    serviceArea,
+    description,
+    providerImage,
+  } = data;
+
+  const handleUpdate = (e) => {
     e.preventDefault();
-
+    console.log("update");
     const form = e.target;
+
     const service = {
       photo: form.serviceUrl.value,
       serviceName: form.serviceName.value,
@@ -26,12 +47,12 @@ const AddService = () => {
     };
     console.log(service);
     axios
-      .post("http://localhost:3000/addService", service)
+      .put(`http://localhost:3000/addServices/${_id}`, service)
       .then((res) => {
         console.log(res.data);
         Swal.fire({
           icon: "success",
-          title: "Successfully added!",
+          title: "Successfully Updated!",
         });
       })
       .catch((error) => {
@@ -45,13 +66,14 @@ const AddService = () => {
   };
   return (
     <div>
-      <h2>Add service</h2>
+      <h2>Edit Service </h2>
+      {/* form */}
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <form
-                onSubmit={handleAdd}
+                onSubmit={handleUpdate}
                 className="space-y-4 md:space-y-6"
                 action="#"
               >
@@ -69,6 +91,7 @@ const AddService = () => {
                     id="url"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="service url"
+                    defaultValue={photo}
                     required=""
                   />
                 </div>
@@ -86,6 +109,7 @@ const AddService = () => {
                     id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="service name"
+                    defaultValue={serviceName}
                     required=""
                   />
                 </div>
@@ -101,10 +125,11 @@ const AddService = () => {
                     type="name"
                     name="yourName"
                     id="name"
-                    value={userName}
+                    // value={userName}
                     placeholder="Your Name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    defaultValue={yourName}
                   />
                 </div>
                 {/* email */}
@@ -118,7 +143,8 @@ const AddService = () => {
                   <input
                     type="email"
                     name="email"
-                    value={userEmail}
+                    // value={userEmail}
+                    defaultValue={email}
                     id="email"
                     placeholder="Your Email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -138,6 +164,7 @@ const AddService = () => {
                     name="price"
                     id="price"
                     placeholder="Price"
+                    defaultValue={price}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
                   />
@@ -157,6 +184,7 @@ const AddService = () => {
                     placeholder="Service area"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    defaultValue={serviceArea}
                   />
                 </div>
                 {/* description */}
@@ -174,6 +202,7 @@ const AddService = () => {
                     placeholder="Description"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
+                    defaultValue={description}
                   />
                 </div>
                 {/* provider image */}
@@ -187,7 +216,8 @@ const AddService = () => {
                   <input
                     type="url"
                     name="providerUrl"
-                    value={photoUrl}
+                    // value={photoUrl}
+                    defaultValue={providerImage}
                     id="url"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="service url"
@@ -197,11 +227,10 @@ const AddService = () => {
 
                 {/* add btn */}
                 <button
-                  //   onClick={handleAdd()}
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Add
+                  Update
                 </button>
               </form>
             </div>
@@ -212,4 +241,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default EditService;

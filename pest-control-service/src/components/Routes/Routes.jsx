@@ -10,6 +10,7 @@ import AllServices from "../Pages/AllServices/AllServices";
 import SingleService from "../Pages/SingleService/SingleService";
 import AddService from "../Pages/AddService/AddService";
 import ManageService from "../Pages/ManageService/ManageService";
+import EditService from "../Pages/EditService.jsx/EditService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/manageService",
         element: <ManageService></ManageService>,
+      },
+      {
+        path: "/editService/:id",
+        element: <EditService></EditService>,
       },
       {
         path: "login",
