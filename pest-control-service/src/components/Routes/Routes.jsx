@@ -9,6 +9,7 @@ import Services from "../Pages/Services/Services";
 import AllServices from "../Pages/AllServices/AllServices";
 import SingleService from "../Pages/SingleService/SingleService";
 import AddService from "../Pages/AddService/AddService";
+import ManageService from "../Pages/ManageService/ManageService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/addService",
         element: <AddService />,
+      },
+      {
+        path: "/manageService",
+        element: <ManageService></ManageService>,
       },
       {
         path: "login",
