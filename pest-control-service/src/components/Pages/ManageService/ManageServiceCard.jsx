@@ -1,10 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { useContext } from "react";
 
 const ManageServiceCard = ({ service, refetch }) => {
-  // console.log(Object.keys(service).join(","));
-  const editProduct = useNavigate();
+  const { user } = useContext(AuthContext);
+  const currentUser = user.email;
+
   const {
     _id,
     photo,
@@ -16,6 +19,13 @@ const ManageServiceCard = ({ service, refetch }) => {
     description,
     providerImage,
   } = service;
+  const Email = email;
+  const isCurrentUser = currentUser === Email;
+  console.log(isCurrentUser);
+  // console.log("Email", Email);
+  if (!isCurrentUser) {
+    return null;
+  }
 
   // handle delete
   const handleDelete = () => {
@@ -43,6 +53,7 @@ const ManageServiceCard = ({ service, refetch }) => {
       }
     });
   };
+
   return (
     <div>
       <div>

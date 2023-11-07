@@ -1,5 +1,32 @@
+import { useState } from "react";
+import axios from "axios";
+
 const MySchedulesCard = ({ schedules }) => {
-  console.log(Object.keys(schedules).join(","));
+  const [selectedStatus, setSelectedStatus] = useState(schedules.status);
+
+  const handleStatusChange = (e) => {
+    const newStatus = e.target.value;
+    setSelectedStatus(newStatus);
+    updateStatusInDatabase(schedules._id, newStatus);
+  };
+  const updateStatusInDatabase = async (serviceId, newStatus) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:3000/booking/${serviceId}/status`,
+        {
+          status: newStatus,
+        }
+      );
+      if (res.data.success) {
+        console.log("Status updated successfully!");
+      } else {
+        console.error("Error updating status:", res.data.message);
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
   const {
     _id,
     serviceName,
@@ -42,10 +69,28 @@ const MySchedulesCard = ({ schedules }) => {
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {specialInstruction}
           </p>
+          <div className="mb-3">
+            <label
+              htmlFor="status"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              {" "}
+              Status
+            </label>
+            <select
+              id="status"
+              value={selectedStatus}
+              onChange={handleStatusChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default MySchedulesCard;

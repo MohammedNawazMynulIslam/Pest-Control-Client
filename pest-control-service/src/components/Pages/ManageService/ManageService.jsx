@@ -6,6 +6,7 @@ import ManageServiceCard from "./ManageServiceCard";
 const ManageService = () => {
   const { data, isLoading, isFetching, refetch } = useManageService();
   console.log(data, isLoading, isFetching, refetch);
+  console.log(typeof data);
 
   if (isLoading === true) {
     return (
@@ -25,6 +26,7 @@ const ManageService = () => {
             key={service._id}
             service={service}
             refetch={refetch}
+            // loggedInUserEmail={loggedInUserEmail}
           />
         ))}
       </div>
