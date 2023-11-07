@@ -21,7 +21,7 @@ const SingleService = () => {
   };
 
   const handlePurchase = (bookingData) => {
-    axios.post("http://localhost:3000/bookings", bookingData).then(
+    axios.post("http://localhost:3000/booking", bookingData).then(
       ((res) => {
         console.log("Booking succesful", res);
         Swal.fire({
