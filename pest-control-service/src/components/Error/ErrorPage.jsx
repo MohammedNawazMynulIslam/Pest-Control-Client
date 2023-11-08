@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import Error from "../../assets/404.json";
-
+import Helmet from "react-helmet";
 import { useTypewriter } from "react-simple-typewriter";
 const ErrorPage = () => {
   const [text] = useTypewriter({
@@ -10,7 +10,10 @@ const ErrorPage = () => {
   });
 
   return (
-    <>
+    <div>
+      <Helmet>
+        <title> Pest Control | Error</title>
+      </Helmet>
       <div className="App text-center my-14 font-extrabold text-7xl">
         <span className="text-green-500">{text}</span>
       </div>
@@ -27,7 +30,7 @@ const ErrorPage = () => {
           </button>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 export default ErrorPage;

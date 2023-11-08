@@ -1,4 +1,5 @@
 import useSingleService from "../../../hooks/useSingleService";
+import { Helmet } from "react-helmet";
 import Lottie from "lottie-react";
 import Swal from "sweetalert2";
 import Loading from "../../../assets/loading.json";
@@ -66,58 +67,63 @@ const SingleService = () => {
   } = data;
 
   return (
-    <div className="mx-auto flex justify-center items-center flex-col gap-5">
-      <h1 className=" flex flex-col justify-center items-center text-green-700 font-bold  text-5xl underline text-center my-10">
-        Single Service
-      </h1>
+    <>
+      <Helmet>
+        <title>Pest Control | Single Service</title>
+      </Helmet>
+      <div className="mx-auto flex justify-center items-center flex-col gap-5">
+        <h1 className=" flex flex-col justify-center items-center text-green-700 font-bold  text-5xl underline text-center my-10">
+          Single Service
+        </h1>
 
-      <Card
-        className="max-w-sm "
-        imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-        imgSrc={providerImage}
-      >
-        <a href="#">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-            {providerName}
-          </h5>
-        </a>
-        <p className="dark:text-white">{serviceArea}</p>
-        <div className="mb-5 mt-2.5 flex items-center">
-          <img src={serviceImage} alt="" />
-        </div>
-        <p className="dark:text-white">{serviceName}</p>
-        <p className="dark:text-white">{serviceDescription}</p>
-
-        <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 dark:text-white">
-            {servicePrice}
-          </span>
-
-          <div className="text-center">
-            <button
-              onClick={handleBookNow}
-              type="button"
-              className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-              data-hs-overlay="#hs-subscription-with-image"
-            >
-              Book Now
-            </button>
+        <Card
+          className="max-w-sm "
+          imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
+          imgSrc={providerImage}
+        >
+          <a href="#">
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              {providerName}
+            </h5>
+          </a>
+          <p className="dark:text-white">{serviceArea}</p>
+          <div className="mb-5 mt-2.5 flex items-center">
+            <img src={serviceImage} alt="" />
           </div>
-        </div>
-      </Card>
+          <p className="dark:text-white">{serviceName}</p>
+          <p className="dark:text-white">{serviceDescription}</p>
 
-      {isModalOpen && (
-        <BookingModal
-          serviceName={serviceName}
-          serviceImage={serviceImage}
-          serviceProviderEmail={providerEmail}
-          userEmail={userEmail}
-          servicePrice={servicePrice}
-          onPurchase={handlePurchase}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
-    </div>
+          <div className="flex items-center justify-between">
+            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+              {servicePrice}
+            </span>
+
+            <div className="text-center">
+              <button
+                onClick={handleBookNow}
+                type="button"
+                className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                data-hs-overlay="#hs-subscription-with-image"
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+        </Card>
+
+        {isModalOpen && (
+          <BookingModal
+            serviceName={serviceName}
+            serviceImage={serviceImage}
+            serviceProviderEmail={providerEmail}
+            userEmail={userEmail}
+            servicePrice={servicePrice}
+            onPurchase={handlePurchase}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </div>
+    </>
   );
 };
 export default SingleService;

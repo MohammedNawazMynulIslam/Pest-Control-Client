@@ -1,4 +1,5 @@
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 import Loading from "../../../assets/loading.json";
 import useServicesArea from "../../../hooks/useServicesArea";
 import AllServicesCard from "./AllServicesCard";
@@ -32,30 +33,35 @@ const AllServices = () => {
   );
 
   return (
-    <div className="mx-auto flex justify-center items-center flex-col gap-5">
-      <h2 className="text-5xl text-center font-bold my-10">All Services </h2>
-      <input
-        type="text"
-        value={serviceTerm}
-        onChange={handleSearch}
-        placeholder="Service Name"
-        className="border p-2 rounded"
-      />
+    <>
+      <Helmet>
+        <title>Pest Control | All Services</title>
+      </Helmet>
+      <div className="mx-auto flex justify-center items-center flex-col gap-5">
+        <h2 className="text-5xl text-center font-bold my-10">All Services </h2>
+        <input
+          type="text"
+          value={serviceTerm}
+          onChange={handleSearch}
+          placeholder="Service Name"
+          className="border p-2 rounded"
+        />
 
-      {filteredName.slice(0, showMore).map((allservice) => {
-        return (
-          <AllServicesCard
-            key={allservice._id}
-            allservice={allservice}
-          ></AllServicesCard>
-        );
-      })}
-      {showMore < filteredName.length && (
-        <Button onClick={handleShowMore} color="success">
-          Show More
-        </Button>
-      )}
-    </div>
+        {filteredName.slice(0, showMore).map((allservice) => {
+          return (
+            <AllServicesCard
+              key={allservice._id}
+              allservice={allservice}
+            ></AllServicesCard>
+          );
+        })}
+        {showMore < filteredName.length && (
+          <Button onClick={handleShowMore} color="success">
+            Show More
+          </Button>
+        )}
+      </div>
+    </>
   );
 };
 
