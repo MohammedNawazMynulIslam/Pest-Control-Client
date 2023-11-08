@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import anime2 from "../../../assets/login.json";
 import { useContext } from "react";
+
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const LogIn = () => {
@@ -22,15 +23,38 @@ const LogIn = () => {
       console.log(result.user);
       notifySuccess("Login Successfully");
     });
+
+    fetch("http://localhost:3000/jwt", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log(result);
-        navigate(location?.state ? location.state : "/");
-        notifySuccess("Login Successfully");
-      })
+    googleSignIn().then((result) => {
+      // console.log(result.email);
+      const googleEmail = result.email;
+      console.log(googleEmail);
+      navigate(location?.state ? location.state : "/");
+      notifySuccess("Login Successfully");
+    });
+    fetch("http://localhost:3000/google-jwt", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ googleEmail: googleSignIn }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+
       .catch((error) => {
         console.error(error);
         Swal.fire({
@@ -48,6 +72,8 @@ const LogIn = () => {
       text: message,
     });
   };
+  //
+
   return (
     <div className=" container mx-auto flex  flex-col lg:flex-row md:flex-col  justify-center items-center ">
       <div className="">

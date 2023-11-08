@@ -78,6 +78,7 @@ const NavBar = () => {
                 Home
               </NavLink>
               <NavLink
+                to="/allServices"
                 className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
                   location.pathname === "/services" ? "underline " : ""
                 }`}

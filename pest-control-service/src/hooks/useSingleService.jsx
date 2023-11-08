@@ -6,7 +6,10 @@ const useSingleService = ({ _id }) => {
     queryFn: async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/serviceswithAreaandemail/${_id}`
+          `http://localhost:3000/serviceswithAreaandemail/${_id}`,
+          {
+            credentials: "include",
+          }
         );
 
         if (!response.ok) {

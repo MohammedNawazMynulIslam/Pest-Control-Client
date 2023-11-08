@@ -4,7 +4,9 @@ const useBooking = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
-      const data = await fetch("http://localhost:3000/booking");
+      const data = await fetch("http://localhost:3000/booking", {
+        credentials: "include",
+      });
       return await data.json();
     },
   });
