@@ -41,7 +41,7 @@ const LogIn = () => {
     googleSignIn().then((result) => {
       // console.log(result.email);
       const googleEmail = result.email;
-      console.log(googleEmail);
+      // console.log(googleEmail);
       navigate(location?.state ? location.state : "/");
       notifySuccess("Login Successfully");
     });

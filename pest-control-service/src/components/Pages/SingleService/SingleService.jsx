@@ -22,23 +22,24 @@ const SingleService = () => {
   };
 
   const handlePurchase = (bookingData) => {
-    axios.post("http://localhost:3000/booking", bookingData).then(
-      ((res) => {
+    axios
+      .post("http://localhost:3000/booking", bookingData)
+      .then((res) => {
         console.log("Booking succesful", res);
         Swal.fire({
           icon: "success",
           title: "Booked successfully",
           text: "Thank you for booking this service!",
         });
-      }).catch((err) => {
+      })
+      .catch((err) => {
         console.error("Error booking service:", err);
         Swal.fire({
           icon: "error",
           title: "Booking Failed",
           text: "An error occurred while booking the service. Please try again later.",
         });
-      })
-    );
+      });
   };
 
   if (isLoading === true) {

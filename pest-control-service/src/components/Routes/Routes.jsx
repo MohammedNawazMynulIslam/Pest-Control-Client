@@ -13,6 +13,7 @@ import ManageService from "../Pages/ManageService/ManageService";
 import EditService from "../Pages/EditService.jsx/EditService";
 import MySchedules from "../Pages/MySchedules/MySchedules";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
         path: "/editService/:id",
         element: <EditService></EditService>,
       },
+      // {
+      //   path: "/booking",
+      //   element: <BookingPage></BookingPage>,
+      // }
+
       {
         path: "/mySchedules",
         element: (
