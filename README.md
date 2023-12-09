@@ -12,11 +12,7 @@ Welcome to PestGuard Services, your go-to destination for hassle-free pest contr
 - Lottie Animation
 - Firebase
 
-**Backend:**
-- MongoDB
-- Express
-- Node.js
-- JWT (JSON Web Token)
+
 
 🔑 **Key Features:**
 
