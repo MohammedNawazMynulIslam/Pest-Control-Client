@@ -21,7 +21,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <header className="flex  dark:bg-gray-800 ">
+      <header className="flex p-5 dark:bg-gray-800 ">
         <nav
           className="max-w-[80rem] w-full mx-auto px-4 sm:flex sm:justify-between"
           aria-label="Global"
@@ -31,10 +31,10 @@ const NavBar = () => {
               <div className="flex flex-col lg:flex-row justify-center items-center">
                 <img
                   className="w-[70px] mr-4"
-                  src="https://i.ibb.co/MBt7ntK/c02a0527874bb2d01be8ea75f1346c51.jpg"
+                  src="https://i.ibb.co/dG4z3W0/pest-logo.png"
                 />
                 <h2 className="text-xl md:text-2xl text-white lg:text-5xl font-bold ">
-                  Pest <br />
+                  Pest
                   <span className="text-green-400">Control</span>
                 </h2>
               </div>

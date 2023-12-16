@@ -12,7 +12,7 @@ const MySchedulesCard = ({ schedules }) => {
   const updateStatusInDatabase = async (serviceId, newStatus) => {
     try {
       const res = await axios.put(
-        `https://pestcontrol-seven.vercel.app/booking/${serviceId}/status`,
+        `http://localhost:3000/booking/${serviceId}/status`,
         {
           status: newStatus,
         }

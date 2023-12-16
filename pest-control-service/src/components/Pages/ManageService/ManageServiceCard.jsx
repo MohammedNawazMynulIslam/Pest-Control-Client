@@ -30,30 +30,28 @@ const ManageServiceCard = ({ service, refetch }) => {
   // handle delete
   const handleDelete = () => {
     console.log(_id);
-    axios
-      .delete(`https://pestcontrol-seven.vercel.app/addServices/${_id}`)
-      .then((res) => {
-        if (res?.data?.deletedCount > 0) {
-          Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-          }).then((res) => {
-            if (res.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
-              });
-            }
-          });
-          refetch();
-        }
-      });
+    axios.delete(`http://localhost:3000/addServices/${_id}`).then((res) => {
+      if (res?.data?.deletedCount > 0) {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((res) => {
+          if (res.isConfirmed) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+        refetch();
+      }
+    });
   };
 
   return (

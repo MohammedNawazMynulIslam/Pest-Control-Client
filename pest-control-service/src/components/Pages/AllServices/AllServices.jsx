@@ -38,7 +38,9 @@ const AllServices = () => {
         <title>Pest Control | All Services</title>
       </Helmet>
       <div className="mx-auto flex justify-center items-center flex-col gap-5">
-        <h2 className="text-5xl text-center font-bold my-10">All Services </h2>
+        <h2 className=" text-green-700 font-bold  text-5xl underline text-center mt-10">
+          All Services
+        </h2>
         <input
           type="text"
           value={serviceTerm}

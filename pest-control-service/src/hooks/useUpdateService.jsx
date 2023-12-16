@@ -6,7 +6,7 @@ const useUpdateService = ({ _id }) => {
     queryFn: async () => {
       try {
         const response = await fetch(
-          `https://pestcontrol-seven.vercel.app/addServices/${_id}`,
+          `http://localhost:3000/addServices/${_id}`,
           {
             credentials: "include",
           }

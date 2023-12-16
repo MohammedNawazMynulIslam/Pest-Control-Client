@@ -27,7 +27,7 @@ const AddService = () => {
     };
     console.log(service);
     axios
-      .post("https://pestcontrol-seven.vercel.app/addService", service)
+      .post("http://localhost:3000/addService", service)
       .then((res) => {
         console.log(res.data);
         Swal.fire({

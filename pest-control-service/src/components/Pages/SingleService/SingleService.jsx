@@ -23,7 +23,7 @@ const SingleService = () => {
 
   const handlePurchase = (bookingData) => {
     axios
-      .post("https://pestcontrol-seven.vercel.app/booking", bookingData)
+      .post("http://localhost:3000/booking", bookingData)
       .then((res) => {
         console.log("Booking succesful", res);
         Swal.fire({
