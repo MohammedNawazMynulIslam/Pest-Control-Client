@@ -9,7 +9,7 @@ const Banner = () => {
         </small>
       </h2>
       <p className="font-bold text-4xl text-center my-9">
-        The Trusted Authority in Pest <br /> Control
+        The Trusted Authority
       </p>
       <div className=" grid h-56 grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 sm:h-64 xl:h-80 2xl:h-96">
         <Carousel>

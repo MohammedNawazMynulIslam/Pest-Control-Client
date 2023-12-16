@@ -23,10 +23,11 @@ const Services = () => {
       <p className="font-bold text-5xl text-center mb-11">
         Eliminate Unwanted Pests
       </p>
-
-      {data.map((service) => (
-        <ServicesCard key={service._id} service={service}></ServicesCard>
-      ))}
+      <div className="grid sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
+        {data.map((service) => (
+          <ServicesCard key={service._id} service={service}></ServicesCard>
+        ))}
+      </div>
     </div>
   );
 };
