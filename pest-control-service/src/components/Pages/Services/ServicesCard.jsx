@@ -9,7 +9,7 @@ const ServicesCard = ({ service }) => {
     providerName,
     servicePrice,
   } = service || {};
-
+  console.log(service);
   return (
     <div className="flex justify-center items-center">
       <div className="max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100 m-4">

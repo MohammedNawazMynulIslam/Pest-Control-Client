@@ -24,6 +24,7 @@ const useSingleService = ({ _id }) => {
       }
     },
   });
+
   return { data, isLoading, isFetching, refetch };
 };
 

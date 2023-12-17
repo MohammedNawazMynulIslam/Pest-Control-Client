@@ -2,6 +2,7 @@ import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
 const AllServicesCard = ({ allservice }) => {
   console.log(Object.keys(allservice).join(","));
+  console.log(allservice);
   const {
     _id,
     serviceImage,
@@ -12,6 +13,7 @@ const AllServicesCard = ({ allservice }) => {
     servicePrice,
     serviceArea,
   } = allservice;
+
   return (
     <div>
       {" "}
@@ -81,7 +83,7 @@ const AllServicesCard = ({ allservice }) => {
             </span>
             <Link
               to={`/service/${_id}`}
-              className="rounded-lg bg-cyan-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+              className="rounded-lg dark:bg-violet-400  px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300  dark:hover:dark:bg-violet-400  dark:focus:ring-cyan-800"
             >
               View Details
             </Link>
