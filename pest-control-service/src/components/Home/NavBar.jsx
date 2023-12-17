@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Switch, useDarkreader } from "react-darkreader";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [isDark, { toggle }] = useDarkreader(false);
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
 
@@ -66,7 +67,7 @@ const NavBar = () => {
             <div
               className={`${
                 isMenuOpen ? "block" : "hidden"
-              } sm:flex flex-row sm:items-center sm:ml-4`}
+              } sm:grid grid-cols-4 sm:items-center  justify-center sm:ml-4`}
             >
               <NavLink
                 exact="true"
@@ -155,13 +156,14 @@ const NavBar = () => {
               ) : (
                 <NavLink
                   to="/login"
-                  className={`ml-4 font-medium text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
+                  className={`ml-4 font-medium mr-3 text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 ${
                     location.pathname === "/login" ? "underline " : ""
                   }`}
                 >
-                  Log in
+                  LogIn
                 </NavLink>
               )}
+              <Switch checked={isDark} onChange={toggle} styling="github" />
             </div>
           </div>
         </nav>
