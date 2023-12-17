@@ -39,7 +39,7 @@ const MySchedulesCard = ({ schedules }) => {
   } = schedules;
   return (
     <div>
-      <div className=" w-[300px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className=" w-[300px] h-[650px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
           <img
             className="rounded-t-lg w-contents h-fit"

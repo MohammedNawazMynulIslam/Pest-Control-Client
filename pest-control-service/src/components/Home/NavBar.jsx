@@ -23,7 +23,7 @@ const NavBar = () => {
     <div>
       <header className="flex p-5 dark:bg-gray-800 ">
         <nav
-          className="max-w-[80rem] w-full mx-auto px-4 sm:flex sm:justify-between"
+          className="max-w-[80rem] w-full mx-auto px-4 sm:flex sm:justify-between items-center"
           aria-label="Global"
         >
           <NavLink to="/">
