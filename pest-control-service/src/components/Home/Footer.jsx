@@ -5,7 +5,7 @@ const Footer = () => {
         <div>
           <img
             className="w-[70px] mr-4"
-            src="https://i.ibb.co/MBt7ntK/c02a0527874bb2d01be8ea75f1346c51.jpg"
+            src="https://i.ibb.co/dG4z3W0/pest-logo.png"
           />
         </div>
         <div className="text-center">
