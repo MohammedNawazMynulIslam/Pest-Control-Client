@@ -1,22 +1,36 @@
-import Services from "../Pages/Services/Services";
-import Artical from "./Artical";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 import Banner from "./Banner";
 import Banner1 from "./Banner1";
+import Services from "../Pages/Services/Services";
 import TESTIMONIALS from "./TESTIMONIALS";
-import { Helmet } from "react-helmet";
+import Artical from "./Artical";
+
 const Homepage = () => {
+  useEffect(() => {
+    // You can add Framer Motion or other animation library initialization here if needed
+  }, []);
+
   return (
     <>
       <Helmet>
         <title>Pest Control | Home</title>
       </Helmet>
-      <div>
-        <Banner1></Banner1>
-        <Banner></Banner>
-        <Services></Services>
-        <TESTIMONIALS></TESTIMONIALS>
-        <Artical></Artical>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -100 }}
+        transition={{ ease: "easeOut", duration: 1 }}
+      >
+        <Banner1 />
+        <Banner />
+
+        <Services />
+
+        <TESTIMONIALS />
+        <Artical />
+      </motion.div>
     </>
   );
 };
