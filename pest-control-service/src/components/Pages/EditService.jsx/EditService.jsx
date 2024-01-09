@@ -48,7 +48,7 @@ const EditService = () => {
     };
     console.log(service);
     axios
-      .put(`http://localhost:3000/addServices/${_id}`, service)
+      .put(`https://pestcontrol-seven.vercel.app/addServices/${_id}`, service)
       .then((res) => {
         console.log(res.data);
         Swal.fire({

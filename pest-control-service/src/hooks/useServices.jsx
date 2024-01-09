@@ -3,7 +3,7 @@ const useServices = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
-      const data = await fetch("http://localhost:3000/services");
+      const data = await fetch("https://pestcontrol-seven.vercel.app/services");
       return await data.json();
     },
   });

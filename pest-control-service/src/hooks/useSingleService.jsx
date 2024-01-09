@@ -6,7 +6,7 @@ const useSingleService = ({ _id }) => {
     queryFn: async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/serviceswithAreaandemail/${_id}`,
+          `https://pestcontrol-seven.vercel.app/serviceswithAreaandemail/${_id}`,
           {
             credentials: "include",
           }

@@ -25,7 +25,7 @@ const LogIn = () => {
       notifySuccess("Login Successfully");
     });
 
-    fetch("http://localhost:3000/jwt", {
+    fetch("https://pestcontrol-seven.vercel.app/jwt", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -45,7 +45,7 @@ const LogIn = () => {
       navigate(location?.state ? location.state : "/");
       notifySuccess("Login Successfully");
     });
-    fetch("http://localhost:3000/google-jwt", {
+    fetch("https://pestcontrol-seven.vercel.app/google-jwt", {
       method: "POST",
       credentials: "include",
       headers: {

@@ -5,7 +5,7 @@ import useServicesArea from "../../../hooks/useServicesArea";
 import AllServicesCard from "./AllServicesCard";
 import { Button } from "flowbite-react";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
 const AllServices = () => {
   const [serviceTerm, setServiceName] = useState("");
   const [showMore, setShowMore] = useState(6);
@@ -37,32 +37,39 @@ const AllServices = () => {
       <Helmet>
         <title>Pest Control | All Services</title>
       </Helmet>
-      <div className="mx-auto flex justify-center items-center flex-col gap-5">
-        <h2 className=" text-green-700 font-bold  text-5xl underline text-center mt-10">
-          All Services
-        </h2>
-        <input
-          type="text"
-          value={serviceTerm}
-          onChange={handleSearch}
-          placeholder="Service Name"
-          className="border p-2 rounded"
-        />
+      <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -100 }}
+        transition={{ ease: "easeOut", duration: 1 }}
+      >
+        <div className="mx-auto flex justify-center items-center flex-col gap-5">
+          <h2 className=" text-green-700 font-bold  text-5xl underline text-center mt-10">
+            All Services
+          </h2>
+          <input
+            type="text"
+            value={serviceTerm}
+            onChange={handleSearch}
+            placeholder="Service Name"
+            className="border p-2 rounded"
+          />
 
-        {filteredName.slice(0, showMore).map((allservice) => {
-          return (
-            <AllServicesCard
-              key={allservice._id}
-              allservice={allservice}
-            ></AllServicesCard>
-          );
-        })}
-        {showMore < filteredName.length && (
-          <Button onClick={handleShowMore} color="success">
-            Show More
-          </Button>
-        )}
-      </div>
+          {filteredName.slice(0, showMore).map((allservice) => {
+            return (
+              <AllServicesCard
+                key={allservice._id}
+                allservice={allservice}
+              ></AllServicesCard>
+            );
+          })}
+          {showMore < filteredName.length && (
+            <Button onClick={handleShowMore} color="success">
+              Show More
+            </Button>
+          )}
+        </div>
+      </motion.div>
     </>
   );
 };
